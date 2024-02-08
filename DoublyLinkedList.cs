@@ -88,6 +88,22 @@ namespace GA_LinkedListDoubly_Ronda
             count++;
         } // InsertAtFront
 
+        // Inserts a new node at the tail
+        internal void InsertAtEnd(T value)
+        {
+            // Create a new node with the given value.
+            LinkedListNode<T> newNode = new LinkedListNode<T>(value);
+
+            // Set the "Previous" reference of the new node to the current tail.
+            newNode.Previous = tail;
+
+            // Set the "Next" reference of the current tail to the new node.
+            tail.Next = newNode;
+
+            // Update the tail to be the new node, making it the new last node in the list.
+            tail = newNode;
+        } // InsertAtEnd
+
         // Inserts a new node at the specified index
         public void InsertAtIndex(int index, T value)
         {
