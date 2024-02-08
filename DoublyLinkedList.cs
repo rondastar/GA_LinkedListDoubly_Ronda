@@ -89,6 +89,7 @@ namespace GA_LinkedListDoubly_Ronda
         } // InsertAtFront
 
         // Inserts a new node at the tail
+        // ======================= TEST THIS ONE =============================
         internal void InsertAtEnd(T value)
         {
             // Create a new node with the given value.
@@ -105,6 +106,8 @@ namespace GA_LinkedListDoubly_Ronda
         } // InsertAtEnd
 
         // Inserts a new node at the specified index
+        // ======================= TEST THIS ONE =============================
+
         public void InsertAtIndex(int index, T value)
         {
             // Check if the provided index is out of range.
@@ -235,6 +238,14 @@ namespace GA_LinkedListDoubly_Ronda
                 return current.Value;
             }
         }
+
+        // clears the linked list by resetting the head and tail references to null and count to zero
+        public void Clear()
+        {
+            head = null;
+            tail = null;
+            count = 0;
+        } // Clear
 
         // checks whether index is within the range of the linked list
         public void ValidateRange(int index)
