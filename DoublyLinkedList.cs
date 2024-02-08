@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -170,6 +171,121 @@ namespace GA_LinkedListDoubly_Ronda
             count++;
         } // InsertAtIndex
 
+        // Removes node at the specified index
+        public T RemoveAtIndex(int index)
+        {
+            // Check if the provided index is out of range.
+            ValidateRange(index);
+
+            // Temporary placeholder for data that is being removed
+            T temp = default(T);
+
+            if (index == 0)
+            {
+                // assign value to be removed from head node to temp
+                temp = head.Value;
+
+                // If the next node is empty, reset head and tail to null
+                if (head.Next == null)
+                {
+                    head = null;
+                    tail = null;
+                }
+                if (head.Next != null)
+                {
+                    // If the next node is not null, update references so it is the head
+                    head = head.Next;
+                    head.Previous = null;
+                }
+            }
+            else if (index == count)
+            {
+                // assign value to be removed from tail node to temp
+                temp = tail.Value;
+
+                // Update the references so that the node before the tail is the new tail.
+                tail.Previous = tail;
+                tail.Next = null;
+            }
+            else
+            {
+                // Insert at a middle index.
+                // Initialize a current node to traverse the list to the node before the desired index.
+                LinkedListNode<T> current = head;
+                for (int i = 0; i < index - 1; i++)
+                {
+                    current = current.Next;
+                }
+
+                // Assign value to be removed from next node to temp
+                temp = current.Next.Value;
+
+                // Update references to remove the node at the index.
+                current.Next.Previous = current;
+                current.Next = current.Next.Next;
+            }
+
+            // Decrement the count
+            count--;
+
+            return temp;
+        } // RemoveAtIndex
+
+        // Removes the node at the head
+        public T RemoveAtFront()
+        {
+            // If head is already null, return default
+            if(head == null)
+            {
+                // return default if no value is removed
+                return default(T);
+            }
+
+            // assign value to be removed from head node to temporary variable
+            T temp = head.Value;
+
+            if(head.Next == null)
+            // If the next node is empty, reset head and tail to null
+            if (head.Next == null)
+            {
+                head = null;
+                tail = null;
+            }
+            if (head.Next != null)
+            {
+                // If the next node is not null, update references so it is the head
+                head = head.Next;
+                head.Previous = null;
+            }
+
+            // decrement the count
+            count--;
+             // return the value that was removed
+            return temp;
+        }
+
+        public T RemoveAtEnd()
+        {
+            // If tail is already null, return default
+            if (tail == null)
+            {
+                // return default if no value is removed
+                return default(T);
+            }
+
+            // Assign value to be removed from head node to temporary variable
+            T temp = tail.Value;
+
+            // Update references so that the node before the tail is the new tail
+            tail = tail.Previous;
+            tail.Next = null;
+
+            // decrement the count
+            count--;
+            // return the value that was removed
+            return temp;
+        } // RemoveAtEnd
+
         // Display forward, from head to tail
         public void DisplayForward()
         {
@@ -180,7 +296,7 @@ namespace GA_LinkedListDoubly_Ronda
                 current = current.Next;
             }
             Console.WriteLine("null");
-        }
+        } // DisplayForward
 
         // Display backward, from tail to head
         public void DisplayBackward()
@@ -192,7 +308,7 @@ namespace GA_LinkedListDoubly_Ronda
                 current = current.Previous;
             }
             Console.WriteLine("null");
-        }
+        } // DisplayBackward
 
         // Remove a node by value
         public bool Remove(T value)
@@ -220,7 +336,7 @@ namespace GA_LinkedListDoubly_Ronda
             }
 
             return false;
-        }
+        } // Remove
 
         // Indexer Override - accesses elements by index
         public T this[int index]
@@ -237,7 +353,7 @@ namespace GA_LinkedListDoubly_Ronda
 
                 return current.Value;
             }
-        }
+        } // Indexer Override
 
         // clears the linked list by resetting the head and tail references to null and count to zero
         public void Clear()
