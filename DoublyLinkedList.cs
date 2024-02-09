@@ -50,6 +50,7 @@ namespace GA_LinkedListDoubly_Ronda
         {
             LinkedListNode<T> newNode = new LinkedListNode<T>(value);
 
+            // If the list is empty, set both head and tail to the new node.
             if (head == null)
             {
                 head = newNode;
@@ -57,6 +58,7 @@ namespace GA_LinkedListDoubly_Ronda
             }
             else
             {
+                // If the list is not empty, insert the new node at the end and update the references 
                 newNode.Previous = tail;
                 tail.Next = newNode;
                 tail = newNode;
@@ -79,7 +81,7 @@ namespace GA_LinkedListDoubly_Ronda
             }
             else
             {
-                // If the list is not empty, insert the new node at the front.
+                // If the list is not empty, insert the new node at the front and update the references 
                 newNode.Next = head;
                 head.Previous = newNode;
                 head = newNode;
@@ -188,7 +190,7 @@ namespace GA_LinkedListDoubly_Ronda
                     head = null;
                     tail = null;
                 }
-                if (head.Next != null)
+                else if (head.Next != null)
                 {
                     // If the next node is not null, update references so it is the head
                     head = head.Next;
@@ -206,7 +208,7 @@ namespace GA_LinkedListDoubly_Ronda
             }
             else
             {
-                // Insert at a middle index.
+                // Remove at a middle index.
                 // Initialize a current node to traverse the list to the node before the desired index.
                 LinkedListNode<T> current = head;
                 for (int i = 0; i < index - 1; i++)
@@ -240,8 +242,7 @@ namespace GA_LinkedListDoubly_Ronda
 
             // assign value to be removed from head node to temporary variable
             T temp = head.Value;
-
-            if(head.Next == null)
+            
             // If the next node is empty, reset head and tail to null
             if (head.Next == null)
             {
